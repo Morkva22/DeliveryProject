@@ -1,4 +1,4 @@
-import { create } from "zustand"
+import { create } from "zustand";
 
 export type OrderItem =
 {
@@ -26,7 +26,6 @@ type OrderState =
 	increaseQuantity: (orderItem: OrderItem) => void;
 	decreaseQuantity: (orderItem: OrderItem) => void;
 
-	// calculateTotal: () => { totalAmount: string; totalDiscount:string };
 	totalItems: () => void;
 	getPriceForSize: (item: OrderItem) => {pricePizza: string; price: number; volume:string},
 }
@@ -62,7 +61,7 @@ export const useOrderStore = create<OrderState>
 								)
 							}
 						}
-						
+
 						return { orders: [...state.orders, { ...orderItem, quantity: 1 }] };
 					}
 				)
@@ -141,14 +140,19 @@ export const useOrderStore = create<OrderState>
 			{
 				get().orders.reduce((total, item) => total + (item.quantity || 0), 0);
 			},
-			getPriceForSize: (item) =>
-			{
-				const basePrice = item.selectedSize === 42 ? item.size42 || "0" : item.newPrice;
-				const pricePizza = (parseFloat(basePrice.replace("$", "")));
-				const priceString = typeof item.price === "string" ? item.price : item.price?.price || "0";
+            getPriceForSize: (item) =>
+            {
+                const basePrice = item.selectedSize === 42 ? item.size42 || "0" : item.newPrice;
+                const pricePizza = parseFloat(basePrice.replace("$", ""));
+                const priceString = typeof item.price === "string" ? item.price : item.price?.price || 0;
+                const volume = item.volume || "";
 
-				return { pricePizza }
-			}
+                return {
+                    pricePizza: basePrice, // возвращаем строку с форматом "$X"
+                    price: pricePizza,     // возвращаем число
+                    volume: volume         // возвращаем объем
+                };
+            }
 		}
 	)
 )
