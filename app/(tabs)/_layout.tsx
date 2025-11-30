@@ -1,40 +1,33 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { colors } from '../components/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '../components/Colors';
 
 export default function TabLayout() {
-    const colorScheme = useColorScheme();
-
     return (
         <Tabs
             screenOptions={{
-                tabBarStyle:
-                    {
-                        backgroundColor: "#0c0c0f",
-                        borderTopColor: "#1c1c22",
-                    },
-                tabBarActiveTintColor: colors.red,
-                tabBarInactiveTintColor: "#6b6b78",
                 headerShown: false,
-                tabBarLabelStyle:
-                    {
-                        fontWeight: 600,
-                        letterSpacing: 0.3
-                    },
-                sceneStyle: { backgroundColor: "#0a0a0d" },
-                tabBarHideOnKeyboard: true
-            }}>
+                tabBarActiveTintColor: colors.red,
+                tabBarInactiveTintColor: '#6b6b78',
+                tabBarStyle: {
+                    backgroundColor: '#0c0c0f',
+                    borderTopColor: '#1c1c22',
+                    height: 64,
+                    paddingBottom: 10,
+                    paddingTop: 8,
+                },
+                tabBarLabelStyle: {
+                    fontWeight: '600',
+                    fontSize: 11,
+                },
+                tabBarHideOnKeyboard: true,
+            }}
+        >
             <Tabs.Screen
                 name="home"
                 options={{
                     title: 'Home',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={size} name="home-outline" color={color}/>,
+                    tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} />,
                 }}
             />
 
@@ -42,15 +35,15 @@ export default function TabLayout() {
                 name="promotions"
                 options={{
                     title: 'Promotions',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={size} name="sparkles-outline" color={color}/>,
+                    tabBarIcon: ({ color, size }) => <Ionicons name="flame-outline" size={size} color={color} />,
                 }}
             />
 
             <Tabs.Screen
-                name="settings"
+                name="wishlist"
                 options={{
-                    title: 'Settings',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={size} name="settings-outline" color={color}/>,
+                    title: 'Wishlist',
+                    tabBarIcon: ({ color, size }) => <Ionicons name="heart-outline" size={size} color={color} />,
                 }}
             />
 
@@ -58,9 +51,20 @@ export default function TabLayout() {
                 name="cart"
                 options={{
                     title: 'Cart',
-                    tabBarIcon: ({ color, size }) => <Ionicons size={size} name="cart-outline" color={color}/>,
+                    tabBarIcon: ({ color, size }) => <Ionicons name="cart-outline" size={size} color={color} />,
                 }}
             />
+
+            <Tabs.Screen
+                name="settings"
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
+                }}
+            />
+
+            <Tabs.Screen name="index" options={{ href: null }} />
+            <Tabs.Screen name="explore" options={{ href: null }} />
         </Tabs>
     );
 }

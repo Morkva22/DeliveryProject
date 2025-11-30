@@ -134,7 +134,6 @@ export const useOrderStore = create<OrderState>
 			},
 			calculateTotal: () =>
 			{
-				// return { totalAmount: "0", totalDiscount: "0" };
 			},
 			totalItems: () =>
 			{
@@ -148,9 +147,9 @@ export const useOrderStore = create<OrderState>
                 const volume = item.volume || "";
 
                 return {
-                    pricePizza: basePrice, // возвращаем строку с форматом "$X"
-                    price: pricePizza,     // возвращаем число
-                    volume: volume         // возвращаем объем
+                    pricePizza: basePrice,
+                    price: pricePizza,
+                    volume: volume
                 };
             }
 		}
